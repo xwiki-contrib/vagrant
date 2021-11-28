@@ -15,9 +15,10 @@ jobs:
       - name: Set up Packer
         uses: hashicorp-contrib/setup-packer@v1 
       - name: Set up QEMU
-        run: sudo apt-get install -y qemu-system
+        run: sudo apt-get install -y qemu-system-x86
       - name: Set up network bridge
         run: |
+          sudo mkdir -p /etc/systemd/network
           echo "[NetDev]\nName=br0\nKind=bridge" | sudo tee /etc/systemd/network/br0.netdev
           echo "[Match]\nName=br0\n\n[Network]\nDHCPServer=yes\nAddress=10.0.2.2/24\nIPForward=ipv4" | sudo tee /etc/system/network/br0.network
           sudo systemctl restart systemd-networkd
