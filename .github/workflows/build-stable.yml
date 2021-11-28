@@ -16,28 +16,6 @@ jobs:
         uses: hashicorp-contrib/setup-packer@v1 
       - name: Set up QEMU
         run: sudo apt-get install -y qemu-system-x86
-      - name: Set up network bridge
-        run: |
-          sudo mkdir -p /etc/systemd/network
-          cat << EOF | sudo tee /etc/systemd/network/br0.netdev
-          [NetDev]
-          Name=br0
-          Kind=bridge
-          EOF
-          cat << EOF | sudo tee /etc/systemd/network/br0.network
-          [Match]
-          Name=br0
-          
-          [Network]
-          DHCPServer=yes
-          Address=10.0.2.2/24
-          IPForward=ipv4
-          EOF
-          sudo systemctl restart systemd-networkd
-          sudo mkdir -p /etc/qemu
-          echo "allow br0" | sudo tee /etc/qemu/bridge.conf
-          ip a
-          sudo chmod 4755 /usr/lib/qemu/qemu-bridge-helper
       - name: Build Artifact
         run: packer build -color=false -on-error=abort -parallel-builds=1 build.pkr.hcl
         env:
