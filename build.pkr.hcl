@@ -37,6 +37,7 @@ source "qemu" "qemu" {
   boot_wait         = "10s"
   disk_interface    = "virtio-scsi"
   headless          = true
+  accelerator       = "tcg"
   disk_size         = "5000M"
   format            = "qcow2"
   http_directory    = "debian-preseed"
