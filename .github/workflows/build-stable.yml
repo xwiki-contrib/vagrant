@@ -33,10 +33,11 @@ jobs:
           Address=10.0.2.2/24
           IPForward=ipv4
           EOF
+          sudo systemctl restart systemd-networkd
           sudo mkdir -p /etc/qemu
           echo "allow br0" | sudo tee /etc/qemu/bridge.conf
-          sudo systemctl restart systemd-networkd
           ip a
+          sudo chmod 4755 /usr/lib/qemu/qemu-bridge-helper
       - name: Build Artifact
         run: sudo packer build -color=false -on-error=abort -parallel-builds=1 build.pkr.hcl
         env:
