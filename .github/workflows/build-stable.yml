@@ -4,7 +4,7 @@ jobs:
   build-images:
     runs-on: ubuntu-latest
     steps:
-      - run: sudo DEBIAN_FRONTEND=noninteractive apt-get install -y virtualbox qemu-system-x86
+      #- run: sudo DEBIAN_FRONTEND=noninteractive apt-get install -y virtualbox qemu-system-x86
       - name: Checkout Repository
         uses: actions/checkout@v2
       - name: Validate Template
@@ -13,8 +13,11 @@ jobs:
           command: validate
           arguments: -syntax-only
           target: build.pkr.hcl
-      - name: Use latest Packer
+      - name: Set up Packer
         uses: hashicorp-contrib/setup-packer@v1 
+      - name: Set up QEMU
+        id: qemu
+        uses: docker/setup-qemu-action@v1
       - name: Build Artifact
         run: packer build -color=false -on-error=abort -parallel-builds=1 build.pkr.hcl
         env:

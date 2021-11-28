@@ -64,7 +64,7 @@ source "virtualbox-iso" "vbox" {
 }
 
 build {
-  sources = ["source.virtualbox-iso.vbox", "source.qemu.qemu"]
+  sources = ["source.qemu.qemu"]
 
   provisioner "shell" {
     inline = [
