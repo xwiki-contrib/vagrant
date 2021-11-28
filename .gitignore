@@ -24,3 +24,9 @@ test/vagrant-spec/.vagrant/
 .idea/*
 *.iml
 .project
+
+# Vagrant / Packer specific
+*.box
+.vagrant/
+packer_cache/
+.pkrvars.hcl

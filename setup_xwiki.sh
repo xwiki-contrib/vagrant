@@ -1,18 +1,14 @@
 #!/bin/sh
 
-if [ ! -f /etc/provisioned ] ; then
-  DEBIAN_FRONTEND=noninteractive /usr/bin/apt-get install -y gnupg
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y gnupg
 
-  /usr/bin/wget -q "https://maven.xwiki.org/public.gpg" -O- | /usr/bin/apt-key add -
-  /usr/bin/wget "https://maven.xwiki.org/lts/xwiki-lts.list" -P /etc/apt/sources.list.d/
+wget -q "https://maven.xwiki.org/public.gpg" -O- | sudo apt-key add -
+sudo wget "https://maven.xwiki.org/lts/xwiki-lts.list" -P /etc/apt/sources.list.d/
 
-  /usr/bin/apt-get update
+sudo apt-get update
 
-  DEBIAN_FRONTEND=noninteractive /usr/bin/apt-get install -y xwiki-tomcat9-mariadb
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y xwiki-tomcat9-mariadb
 
-  /usr/bin/sed -i '/JAVA_OPTS/s/"$/ -Xms1024m -Xmx1024m"/' /etc/default/tomcat9
+sudo sed -i '/JAVA_OPTS/s/"$/ -Xms1024m -Xmx1024m"/' /etc/default/tomcat9
 
-  /usr/bin/systemctl restart tomcat9
-
-  touch /etc/provisioned
-fi
+sudo systemctl restart tomcat9
