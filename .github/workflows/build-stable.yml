@@ -1,0 +1,6 @@
+name: build-stable
+jobs:
+  build-images:
+    runs-on: ubuntu-latest
+    steps:
+      - run: sudo apt search virtualbox
