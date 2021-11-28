@@ -4,7 +4,7 @@ jobs:
   build-images:
     runs-on: ubuntu-latest
     steps:
-      - run: sudo DEBIAN_FRONTEND=noninteractive apt-get install -y virtualbox virtualbox-ext-pack qemu-system-x86
+      - run: sudo DEBIAN_FRONTEND=noninteractive apt-get install -y virtualbox qemu-system-x86
       - name: Checkout Repository
         uses: actions/checkout@v2
       - name: Validate Template
