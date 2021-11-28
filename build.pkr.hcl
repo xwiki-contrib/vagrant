@@ -32,12 +32,10 @@ variable "xwiki_db" {
 }
 
 source "qemu" "qemu" {
-  accelerator       = "kvm"
   boot_command      = ["<esc><wait1s>", "auto url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg", "<enter>"]
   boot_wait         = "10s"
   disk_interface    = "virtio-scsi"
   headless          = true
-  accelerator       = "tcg"
   disk_size         = "5000M"
   format            = "qcow2"
   http_directory    = "debian-preseed"
