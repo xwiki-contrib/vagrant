@@ -13,12 +13,10 @@ jobs:
           command: validate
           arguments: -syntax-only
           target: build.pkr.hcl
+      - name: Use latest Packer
+        uses: hashicorp-contrib/setup-packer@v1 
       - name: Build Artifact
-        uses: hashicorp/packer-github-actions@master
-        with:
-          command: build
-          arguments: "-color=false -on-error=abort -parallel-builds=1"
-          target: build.pkr.hcl
+        run: packer build -color=false -on-error=abort -parallel-builds=1 build.pkr.hcl
         env:
           PKR_VAR_xwiki_version: "13.9"
           PKR_VAR_vagrant_cloud_access_token: ${{ secrets.VAGRANT_CLOUD_ACCESS_TOKEN }}
