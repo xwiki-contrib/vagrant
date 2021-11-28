@@ -1,4 +1,5 @@
 name: build-stable
+on: push
 jobs:
   build-images:
     runs-on: ubuntu-latest
