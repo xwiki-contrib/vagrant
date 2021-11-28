@@ -48,6 +48,7 @@ source "qemu" "qemu" {
   ssh_username      = "vagrant"
   ssh_password      = "vagrant"
   ssh_timeout       = "20m"
+  net_bridge        = "br0"
 }
 
 source "virtualbox-iso" "vbox" {
