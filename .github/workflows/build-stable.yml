@@ -16,7 +16,7 @@ jobs:
       - name: Set up Packer
         uses: hashicorp-contrib/setup-packer@v1 
       - name: Set up QEMU
-        run: sudo apt-get install -y qemu-system-x86
+        run: sudo apt-get install -y qemu-system libvirt-daemon-system
       - name: Build Artifact
         run: packer build -color=false -on-error=abort -parallel-builds=1 build.pkr.hcl
         env:
