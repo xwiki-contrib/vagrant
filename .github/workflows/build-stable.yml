@@ -17,11 +17,11 @@ jobs:
       - name: Set up QEMU
         run: sudo apt-get install -y qemu-system
       - name: Set up network bridge
-        run:
-        - echo "[NetDev]\nName=br0\nKind=bridge" | sudo tee /etc/systemd/network/br0.netdev
-        - echo "[Match]\nName=br0\n\n[Network]\nDHCPServer=yes\nAddress=10.0.2.2/24\nIPForward=ipv4" | sudo tee /etc/system/network/br0.network
-        - sudo systemctl restart systemd-networkd
-        - ip a
+        run: |
+          echo "[NetDev]\nName=br0\nKind=bridge" | sudo tee /etc/systemd/network/br0.netdev
+          echo "[Match]\nName=br0\n\n[Network]\nDHCPServer=yes\nAddress=10.0.2.2/24\nIPForward=ipv4" | sudo tee /etc/system/network/br0.network
+          sudo systemctl restart systemd-networkd
+          ip a
       - name: Build Artifact
         run: packer build -color=false -on-error=abort -parallel-builds=1 build.pkr.hcl
         env:
