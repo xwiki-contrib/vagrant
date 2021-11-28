@@ -21,5 +21,5 @@ jobs:
           target: build.pkr.hcl
         env:
           PKR_VAR_xwiki_version: "13.9"
-          PKR_VAR_vagrant_cloud_access_token: "something something"
+          PKR_VAR_vagrant_cloud_access_token: ${{ secrets.VAGRANT_CLOUD_ACCESS_TOKEN }}
           PACKER_LOG: 1
