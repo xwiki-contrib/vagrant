@@ -33,7 +33,7 @@ jobs:
           Address=10.0.2.2/24
           IPForward=ipv4
           EOF
-          sudo mkdir -p /etc/systemd/qemu
+          sudo mkdir -p /etc/qemu
           echo "allow br0" | sudo tee /etc/qemu/bridge.conf
           sudo systemctl restart systemd-networkd
           ip a
