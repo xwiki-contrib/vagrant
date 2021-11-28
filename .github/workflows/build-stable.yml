@@ -39,7 +39,7 @@ jobs:
           ip a
           sudo chmod 4755 /usr/lib/qemu/qemu-bridge-helper
       - name: Build Artifact
-        run: sudo packer build -color=false -on-error=abort -parallel-builds=1 build.pkr.hcl
+        run: packer build -color=false -on-error=abort -parallel-builds=1 build.pkr.hcl
         env:
           PKR_VAR_xwiki_version: "13.9"
           PKR_VAR_vagrant_cloud_access_token: ${{ secrets.VAGRANT_CLOUD_ACCESS_TOKEN }}
